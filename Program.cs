@@ -9,13 +9,38 @@ List<Product> products = new List<Product>()
     {
         Name = "Football",
         Price = 15,
-        Sold = false
+        Sold = false,
+        Quality = "decent",
+        StockDate = new DateTime(2022, 10, 20),
+        ManufactureYear = 2010
+
     },
     new Product()
     {
         Name = "Hockey Stick",
         Price = 12,
-        Sold = false
+        Sold = false,
+        Quality = "ehhhh",
+        StockDate = new DateTime(2023, 11, 20),
+        ManufactureYear = 2017
+    },
+    new Product()
+    {
+        Name = "Basketball Net",
+        Price = 11,
+        Sold = true,
+        Quality = "great",
+        StockDate = new DateTime(2012, 6, 21),
+        ManufactureYear = 2013
+    },
+    new Product()
+    {
+        Name = "Baseball Glove",
+        Price = 21,
+        Sold = false,
+        Quality = "okay",
+        StockDate = new DateTime(2020, 3, 15),
+        ManufactureYear = 2019
     }
 };
 
@@ -36,5 +61,12 @@ while (response > products.Count || response < 1)  //checks to make sure somethi
 }
 
 Product chosenProduct = products[response - 1];
-Console.WriteLine($"You chose: {chosenProduct.Name}, which costs {chosenProduct.Price} dollars and is {(chosenProduct.Sold ? "" : "not ")}sold.");
+DateTime now = DateTime.Now;
+
+TimeSpan timeInStock = now - chosenProduct.StockDate;
+
+Console.WriteLine(@$"You chose: 
+{chosenProduct.Name}, which costs {chosenProduct.Price} dollars.
+It is {now.Year - chosenProduct.ManufactureYear} years old. 
+It {(chosenProduct.Sold ? "is not available." : $"has been in stock for {timeInStock.Days} days, and is of {chosenProduct.Quality} quality.")}");
 
